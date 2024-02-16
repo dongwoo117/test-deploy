@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+
+    <title>송파구 체육 시설</title>
+
+    <style>
+        body{line-height: 1.6;}
+        
+        #upper{text-align: center;}
+        
+        h1, a {
+        text-align: center;
+        margin-bottom: 0; /* h1과 a 태그의 아래 여백을 없앰 */
+        }
+    </style>
+
+    <script>
+        function displayTable(type) {
+                    if (type == 'contents') {
+                        document.querySelector('.table > tbody').innerHTML = table_contents.join('');
+                    } else if (type == 'all') {
+                        document.querySelector('.table > tbody').innerHTML = table_all.join('');
+                    }
+                }
+
+                let table_rsv = [];
+                let table_contents = [];
+                let table_all = [];
+                
+        fetch('http://openAPI.seoul.go.kr:8088/634a4f64626b726137355752707257/json/ListPublicReservationSport/1/500/')
+            .then((response) => response.json())
+            .then((raw_data) => {
+                data = raw_data['ListPublicReservationSport']['row'];
+                for (let item of data){
+                    if ((item.AREANM == '송파구') && (item.SVCSTATNM == '접수중')) {
+                        table_rsv.push(item);
+                        table_contents.push(`
+                        <tr>
+                            <td>${item.AREANM}</td>
+                            <td>${item.SVCSTATNM}</td>
+                            <td>${item.PLACENM}</td>
+                            <td>${item.SVCNM}</td>
+                            <td>${item.PAYATNM}</td>
+                            <td>
+                                <a href="${item.SVCURL}" target="_blank">예약</a>
+                            </td>
+                        </tr>
+                        `);
+
+                    };
+                    if (item.AREANM == '송파구') {
+                        table_all.push(`
+                        <tr>
+                            <td>${item.AREANM}</td>
+                            <td>${item.SVCSTATNM}</td>
+                            <td>${item.PLACENM}</td>
+                            <td>${item.SVCNM}</td>
+                            <td>${item.PAYATNM}</td>
+                            <td>
+                                <a href="${item.SVCURL}" target="_blank">예약</a>
+                            </td>
+                        </tr>
+                        `);
+                    };
+                };
+                if ((table_contents.length == 0) || (table_all.length == 0)){
+                    table_contents.push(`
+                        <tr>
+                            <td>송파구에는 현재 예약 가능 시설이 없습니다.</td>
+                        </tr>
+                    `);
+                    table_all.push(`
+                        <tr>
+                            <td>송파구에는 현재 예약 가능 시설이 없습니다.</td>
+                        </tr>
+                    `);
+                };
+                displayTable('contents');
+
+                let cnt_18_songpa = table_rsv.length;
+                let cnt18 = document.querySelector('#mt_18_songpa');
+                cnt18.innerText = cnt18.innerText.replace('n18', cnt_18_songpa);
+            });
+    </script>
+</head>
+<body>
+    <div id="upper">
+        <h1><img src="../assets/img/slogan/18_songpa.png" width="7%"> 송파구 체육 시설</h1>
+        <a id ="mt_18_songpa"> 예약 가능 시설 수 : n18</a>
+        <hr>
+    </div>
+
+    <div style="text-align: center;">
+        서울 열린데이터광장
+        <form><input type="radio" name="songpa" id="songpa_part" checked onclick="displayTable('contents')"> Only 접수 중 | 
+            <input type="radio" name="songpa" id="songpa_all" onclick="displayTable('all')"> 송파구 전체 보기 | 
+            <a href="web_map/18_songpamap.html" target="_blank">지도 보기(접수 중)</a><br>
+            <select name="" id="" onchange="window.open(value,'_self');" style="text-align:left";>
+                <option value="">18.송파구</option>
+                <option value="">------------</option>
+                <option value="00_seoul.html">00.서울시</option>
+                <option value="">-----ㄱ-----</option>
+                <option value="01_gangnam.html">01.강남구</option>
+                <option value="02_gangdong.html">02.강동구</option>
+                <option value="03_gangbuk.html">03.강북구</option>
+                <option value="04_gangseo.html">04.강서구</option>
+                <option value="05_gwanak.html">05.관악구</option>
+                <option value="06_gwangjin.html">06.광진구</option>
+                <option value="07_guro.html">07.구로구</option>
+                <option value="08_geumcheon.html">08.금천구</option>
+                <option value="">-----ㄴ-----</option>
+                <option value="09_nowon.html">09.노원구</option>
+                <option value="">-----ㄷ-----</option>
+                <option value="10_dobong.html">10.도봉구</option>
+                <option value="11_dongdaemun.html">11.동대문구</option>
+                <option value="12_dongjak.html">12.동작구</option>
+                <option value="">-----ㅁ-----</option>
+                <option value="13_mapo.html">13.마포구</option>
+                <option value="">-----ㅅ-----</option>
+                <option value="14_seodaemun.html">14.서대문구</option>
+                <option value="15_seocho.html">15.서초구</option>
+                <option value="16_seongdong.html">16.성동구</option>
+                <option value="17_seongbuk.html">17.성북구</option>
+                <option value="18_songpa.html">18.송파구</option>
+                <option value="">-----ㅇ-----</option>
+                <option value="19_yangcheon.html">19.양천구</option>
+                <option value="20_yeongdeungpo.html">20.영등포구</option>
+                <option value="21_yongsan.html">21.용산구</option>
+                <option value="22_eunpyeong.html">22.은평구</option>
+                <option value="">-----ㅈ-----</option>
+                <option value="23_jongno.html">23.종로구</option>
+                <option value="24_junggu.html">24.중구</option>
+                <option value="25_jungnang.html">25.중랑구</option>
+            </select>
+        </form>
+    </div>
+
+    <hr>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">지역구</th>
+                            <th scope="col">예약 상태</th>
+                            <th scope="col">장소</th>
+                            <th scope="col">체육 시설</th>
+                            <th scope="col">유료|무료</th>
+                            <th scope="col">예약 Site</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
