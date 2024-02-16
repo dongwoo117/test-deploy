@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+
+    <title>서울특별시 체육 시설(지도)</title>
+    <style>
+        body{line-height: 1.6;}
+
+        #map_container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 75vh; 
+        }
+
+        #map {
+            width: 99%;
+            height: 99%;
+        }
+        
+        #upper{text-align: center;}
+        
+        .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: auto;margin-left: -90px;text-align: center;overflow: visible;font-size: 14px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;white-space: normal;}
+        .wrap * {padding: 0;margin: 0;}
+        .wrap .info {width: 180px;height: auto;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: auto;background: #fff; }
+        .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+        .info .title {padding: 2px 0 0 2px;height: auto;background: #eee;border-bottom: 1px solid #ddd;font-size: 14px;font-weight: bold;}
+        .info .body {position: relative;overflow: auto;}
+        .info .link {color: #5085BB;}
+
+        h1, a {
+        margin-bottom: 0; /* h1과 a 태그의 아래 여백을 없앰 */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="upper">
+        <h1><img src="../../assets/img/slogan/00_seoul.png" width="9%"> 서울특별시 체육 시설</h1>
+        <a id ="mt_00_seoul"> 예약 가능 시설 수 : n00</a>
+        <hr>
+        <a>서울 열린데이터광장 & 카카오맵<br>
+        체육 시설의 위치가 같으면 서로 겹침으로써 보이지 않을 수 있습니다.<br>
+        <ins>마커를 드래그하여 이동시키면 겹친 위치의 다른 체육 시설 정보를 볼 수 있습니다.</ins></a>
+        <hr>
+    </div>
+
+	<div id="map_container">
+        <div id="map"></div>
+    </div>
+
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=f5c55bf97ecb840a28713b62a563b2fb"></script>
+	<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(37.55012234776026, 126.93605028844246), // 지도의 중심좌표
+		        level: 9, // 지도의 확대 레벨
+		        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류(HYBRID or ROADMAP)
+		    }; 
+
+		// 지도를 생성한다 
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+        var polyline = new kakao.maps.Polyline({
+			map: map, // 선을 표시할 지도 객체 
+			path: [ // 선을 구성하는 좌표 배열
+				new kakao.maps.LatLng(37.43479520109408, 126.93940269258422),
+                new kakao.maps.LatLng(37.442644040309375, 126.96385026308532),
+                new kakao.maps.LatLng(37.468310372208016, 126.99675569843292),
+                new kakao.maps.LatLng(37.46773370232108, 127.00399034723361),
+                new kakao.maps.LatLng(37.45591192493648, 127.01158487828067),
+                new kakao.maps.LatLng(37.458792617292815, 127.0271379116687),
+                new kakao.maps.LatLng(37.466000011422445, 127.03003429927263),
+                new kakao.maps.LatLng(37.46542218129578, 127.03437470862535),
+                new kakao.maps.LatLng(37.43918424597886, 127.03580907849899),
+                new kakao.maps.LatLng(37.430530422686736, 127.04737462234253),
+                new kakao.maps.LatLng(37.43123958921689, 127.07069539647671),
+                new kakao.maps.LatLng(37.43772490914695, 127.07395577616528),
+                new kakao.maps.LatLng(37.44262776587142, 127.07179094000074),
+                new kakao.maps.LatLng(37.44146788431626, 127.0819147616033),
+                new kakao.maps.LatLng(37.44478170457716, 127.08463052848839),
+                new kakao.maps.LatLng(37.445211546390674, 127.08824723891868),
+                new kakao.maps.LatLng(37.456596312162475, 127.09350493692881),
+                new kakao.maps.LatLng(37.45659204646625, 127.0987492537834),
+                new kakao.maps.LatLng(37.462209696421475, 127.10418220755855),
+                new kakao.maps.LatLng(37.461768546515216, 127.11358585488517),
+                new kakao.maps.LatLng(37.46003912689391, 127.11304069805726),
+                new kakao.maps.LatLng(37.45902612251556, 127.11701775282044),
+                new kakao.maps.LatLng(37.46291740706536, 127.11810894022395),
+                new kakao.maps.LatLng(37.466802890082015, 127.1248069927106),
+                new kakao.maps.LatLng(37.46997444111192, 127.12481226552201),
+                new kakao.maps.LatLng(37.468240431670964, 127.12860758330548),
+                new kakao.maps.LatLng(37.467515227168306, 127.13258536980925),
+                new kakao.maps.LatLng(37.46953030733402, 127.13539241056414),
+                new kakao.maps.LatLng(37.47184278198032, 127.13015119580005),
+                new kakao.maps.LatLng(37.475590775093394, 127.13033857947151),
+                new kakao.maps.LatLng(37.47442501571988, 127.14118945024515),
+                new kakao.maps.LatLng(37.478386062654174, 127.14400071460432),
+                new kakao.maps.LatLng(37.478453339330336, 127.14789000612123),
+                new kakao.maps.LatLng(37.48551356638879, 127.15079845476492),
+                new kakao.maps.LatLng(37.50078048190934, 127.16150491341257),
+                new kakao.maps.LatLng(37.50338074409515, 127.15752958426263),
+                new kakao.maps.LatLng(37.502156703912206, 127.15653179625787),
+                new kakao.maps.LatLng(37.50563625786438, 127.14088629455117),
+                new kakao.maps.LatLng(37.51197844657673, 127.14162210345408),
+                new kakao.maps.LatLng(37.51269662396582, 127.14379514718843),
+                new kakao.maps.LatLng(37.51558310138867, 127.14108597234764),
+                new kakao.maps.LatLng(37.54496323347154, 127.16322964788142),
+                new kakao.maps.LatLng(37.54637868766156, 127.18115720129565),
+                new kakao.maps.LatLng(37.54522149877816, 127.18368913461923),
+                new kakao.maps.LatLng(37.55170865608502, 127.18370505452762),
+                new kakao.maps.LatLng(37.55301028126596, 127.18099218082375),
+                new kakao.maps.LatLng(37.57781458661703, 127.17507486979719),
+                new kakao.maps.LatLng(37.58141448426957, 127.17780039959543),
+                new kakao.maps.LatLng(37.57883575879005, 127.16674510641869),
+                new kakao.maps.LatLng(37.56847984385649, 127.14915447032958),
+                new kakao.maps.LatLng(37.567202288377445, 127.13249020000534),
+                new kakao.maps.LatLng(37.557129024180654, 127.11545071759716),
+                new kakao.maps.LatLng(37.55713060650117, 127.11382098785838),
+                new kakao.maps.LatLng(37.55886121388524, 127.11309927812721),
+                new kakao.maps.LatLng(37.556705864578156, 127.10549064647415),
+                new kakao.maps.LatLng(37.5604578098167, 127.10114978992671),
+                new kakao.maps.LatLng(37.571555224875134, 127.104424889595),
+                new kakao.maps.LatLng(37.57357628925944, 127.10116753024023),
+                new kakao.maps.LatLng(37.580494348558794, 127.10298826971446),
+                new kakao.maps.LatLng(37.583660640830615, 127.10878929093977),
+                new kakao.maps.LatLng(37.59345898623975, 127.11351395602566),
+                new kakao.maps.LatLng(37.5940327964312, 127.11641355935794),
+                new kakao.maps.LatLng(37.60009026931695, 127.11352403019107),
+                new kakao.maps.LatLng(37.60786945452045, 127.11897198108322),
+                new kakao.maps.LatLng(37.60974585997322, 127.11661925508383),
+                new kakao.maps.LatLng(37.61926117207489, 127.11572795624822),
+                new kakao.maps.LatLng(37.62128938319207, 127.10503812516997),
+                new kakao.maps.LatLng(37.62763167389465, 127.1057720588764),
+                new kakao.maps.LatLng(37.63252682726307, 127.11248577030862),
+                new kakao.maps.LatLng(37.6421857141539, 127.11213775751162),
+                new kakao.maps.LatLng(37.64247641367791, 127.10960015794907),
+                new kakao.maps.LatLng(37.64565036697656, 127.10688538077224),
+                new kakao.maps.LatLng(37.64479594871912, 127.09455616606986),
+                new kakao.maps.LatLng(37.65979085414025, 127.091311232925),
+                new kakao.maps.LatLng(37.66382394292112, 127.09548699891693),
+                new kakao.maps.LatLng(37.67838649876457, 127.09205952178371),
+                new kakao.maps.LatLng(37.68198941032109, 127.0933336653798),
+                new kakao.maps.LatLng(37.6860232311103, 127.09651311993376),
+                new kakao.maps.LatLng(37.69035047164623, 127.09334414323712),
+                new kakao.maps.LatLng(37.69035651941119, 127.08536233748154),
+                new kakao.maps.LatLng(37.696269740831696, 127.08137789275567),
+                new kakao.maps.LatLng(37.69455108891038, 127.0630530906305),
+                new kakao.maps.LatLng(37.68619542374409, 127.0519809369008),
+                new kakao.maps.LatLng(37.69398140580238, 127.04835809742342),
+                new kakao.maps.LatLng(37.69282958825954, 127.04472913112384),
+                new kakao.maps.LatLng(37.69556896356511, 127.04364227118478),
+                new kakao.maps.LatLng(37.69196868459303, 127.03239281414258),
+                new kakao.maps.LatLng(37.70076338997739, 127.02777016915167),
+                new kakao.maps.LatLng(37.70141431636904, 127.01570519430365),
+                new kakao.maps.LatLng(37.69694607658, 127.01026162298479),
+                new kakao.maps.LatLng(37.68469295991096, 127.00808324136867),
+                new kakao.maps.LatLng(37.680079977285914, 126.99230269141623),
+                new kakao.maps.LatLng(37.667105966924986, 126.99393616618688),
+                new kakao.maps.LatLng(37.66451071942743, 126.98831477573842),
+                new kakao.maps.LatLng(37.65672514863825, 126.98015645883197),
+                new kakao.maps.LatLng(37.63683211715092, 126.98478425519112),
+                new kakao.maps.LatLng(37.629906793415664, 126.9601345969866),
+                new kakao.maps.LatLng(37.63365606339217, 126.96375793356286),
+                new kakao.maps.LatLng(37.65527654106444, 126.9546814518851),
+                new kakao.maps.LatLng(37.65887745865641, 126.94742613247281),
+                new kakao.maps.LatLng(37.65166405790581, 126.93618995357056),
+                new kakao.maps.LatLng(37.64487449934211, 126.91389657556526),
+                new kakao.maps.LatLng(37.64904823978135, 126.90500784532611),
+                new kakao.maps.LatLng(37.644152105149615, 126.9117219002555),
+                new kakao.maps.LatLng(37.638528736636296, 126.91009704530082),
+                new kakao.maps.LatLng(37.63593513447949, 126.9117316224436),
+                new kakao.maps.LatLng(37.63362442091374, 126.90629635036059),
+                new kakao.maps.LatLng(37.62814870000351, 126.90920328189515),
+                new kakao.maps.LatLng(37.62468635977384, 126.90594508094304),
+                new kakao.maps.LatLng(37.612140166298424, 126.90052444360255),
+                new kakao.maps.LatLng(37.60406882495466, 126.90234714334626),
+                new kakao.maps.LatLng(37.603346061309345, 126.89999257468497),
+                new kakao.maps.LatLng(37.59513025548479, 126.90145295816768),
+                new kakao.maps.LatLng(37.59310989215941, 126.89891926310443),
+                new kakao.maps.LatLng(37.589939330616346, 126.90001051611067),
+                new kakao.maps.LatLng(37.58891722978932, 126.8857003741281),
+                new kakao.maps.LatLng(37.59223269914594, 126.88551413732581),
+                new kakao.maps.LatLng(37.59150941963439, 126.882978940666771),
+                new kakao.maps.LatLng(37.58645817160915, 126.87737112536655),
+                new kakao.maps.LatLng(37.57809659392008, 126.87702257540313),
+                new kakao.maps.LatLng(37.57460787323556, 126.8518521285121),
+                new kakao.maps.LatLng(37.605967009234796, 126.805402870026),
+                new kakao.maps.LatLng(37.59932265665241, 126.79762929136213),
+                new kakao.maps.LatLng(37.59039042083497, 126.8009143899377),
+                new kakao.maps.LatLng(37.58822744038122, 126.80055783819182),
+                new kakao.maps.LatLng(37.588368523487496, 126.79874589363014),
+                new kakao.maps.LatLng(37.581151550886524, 126.7935122818193),
+                new kakao.maps.LatLng(37.577258330422936, 126.79297964347181),
+                new kakao.maps.LatLng(37.581869158593264, 126.79169888947956),
+                new kakao.maps.LatLng(37.56684991681899, 126.77707124361591),
+                new kakao.maps.LatLng(37.56814425177383, 126.77543741642799),
+                new kakao.maps.LatLng(37.5603641573416, 126.77781492479811),
+                new kakao.maps.LatLng(37.56252138980342, 126.77509210645465),
+                new kakao.maps.LatLng(37.55572619473132, 126.76497218084018),
+                new kakao.maps.LatLng(37.54853106297206, 126.77151294339494),
+                new kakao.maps.LatLng(37.54107673836929, 126.79434701989484),
+                new kakao.maps.LatLng(37.536463331780865, 126.79417865869102),
+                new kakao.maps.LatLng(37.5382022751721, 126.79942390479499),
+                new kakao.maps.LatLng(37.542530109827595, 126.80122276960411),
+                new kakao.maps.LatLng(37.54340703280547, 126.80846236041288),
+                new kakao.maps.LatLng(37.540689796184175, 126.82240950202197),
+                new kakao.maps.LatLng(37.53045799236999, 126.82478698121862),
+                new kakao.maps.LatLng(37.529453927689744, 126.82822860162402),
+                new kakao.maps.LatLng(37.52671568296664, 126.82877790351881),
+                new kakao.maps.LatLng(37.523971345074244, 126.82516415442454),
+                new kakao.maps.LatLng(37.50868932146503, 126.82447594665045),
+                new kakao.maps.LatLng(37.50767586299968, 126.821582932495),
+                new kakao.maps.LatLng(37.49916683586703, 126.8192509447954),
+                new kakao.maps.LatLng(37.4985817647751, 126.81382416312819),
+                new kakao.maps.LatLng(37.49353729199865, 126.81456039562295),
+                new kakao.maps.LatLng(37.48994550734617, 126.82252970686385),
+                new kakao.maps.LatLng(37.487639481308335, 126.82289698897755),
+                new kakao.maps.LatLng(37.474796128680644, 126.81442582771037),
+                new kakao.maps.LatLng(37.473648746255094, 126.81822713628571),
+                new kakao.maps.LatLng(37.47639029598837, 126.8198484723783),
+                new kakao.maps.LatLng(37.47597204114916, 126.82943639335251),
+                new kakao.maps.LatLng(37.47799185557194, 126.83051714347926),
+                new kakao.maps.LatLng(37.4758363460056, 126.83540590405121),
+                new kakao.maps.LatLng(37.4744081749156, 126.845357518282),
+                new kakao.maps.LatLng(37.48219381303502, 126.846065074943),
+                new kakao.maps.LatLng(37.48191357053067, 126.85239713609488),
+                new kakao.maps.LatLng(37.49504960652304, 126.86702672350474),
+                new kakao.maps.LatLng(37.493611222015886, 126.86992411934764),
+                new kakao.maps.LatLng(37.48986363725682, 126.87047337452212),
+                new kakao.maps.LatLng(37.49203053885357, 126.87463088586543),
+                new kakao.maps.LatLng(37.49030022413539, 126.87427193806128),
+                new kakao.maps.LatLng(37.48943292856386, 126.87210237826844),
+                new kakao.maps.LatLng(37.488136261674406, 126.8728282476044),
+                new kakao.maps.LatLng(37.48929319900681, 126.87626371787643),
+                new kakao.maps.LatLng(37.48727513531919, 126.87644795906613),
+                new kakao.maps.LatLng(37.48323517739797, 126.87319836065444),
+                new kakao.maps.LatLng(37.46248797711006, 126.88498884051717),
+                new kakao.maps.LatLng(37.46306706061143, 126.88751991319845),
+                new kakao.maps.LatLng(37.4613384892862, 126.88896930331654),
+                new kakao.maps.LatLng(37.46061422737564, 126.88535340708292),
+                new kakao.maps.LatLng(37.452403142311574, 126.89187576974706),
+                new kakao.maps.LatLng(37.45283759328894, 126.89404510005426),
+                new kakao.maps.LatLng(37.44880250672602, 126.89567817067439),
+                new kakao.maps.LatLng(37.43597808681597, 126.90274674755992),
+                new kakao.maps.LatLng(37.43410984194371, 126.9101613332634),
+                new kakao.maps.LatLng(37.43944667383383, 126.91395170001441),
+                new kakao.maps.LatLng(37.440460247290424, 126.92027853541671),
+                new kakao.maps.LatLng(37.450412427081915, 126.92804340022083),
+                new kakao.maps.LatLng(37.43479520109408, 126.93940269258422)
+			],
+			strokeWeight: 3, // 선의 두께
+			strokeColor: '#FF0000', // 선 색
+			strokeOpacity: 0.9, // 선 투명도
+			strokeStyle: 'dashed' // 선 스타일
+		});	
+
+        // 지도 타입 변경 컨트롤을 생성한다
+        var mapTypeControl = new kakao.maps.MapTypeControl();
+
+        // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+        // 지도에 확대 축소 컨트롤을 생성한다
+        var zoomControl = new kakao.maps.ZoomControl();
+
+        // 지도의 우측에 확대 축소 컨트롤을 추가한다
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+        let data_01_golf = [];
+        let data_02_edu_facilities = [];
+        let data_03_basketball = [];
+        let data_04_multi_stadium = [];
+        let data_05_volleyball = [];
+        let data_06_badminton = [];
+        let data_07_baseball = [];
+        let data_08_foot_volleyball = [];
+        let data_09_gym = [];
+        let data_10_soccer = [];
+        let data_11_table_tennis = [];
+        let data_12_tennis = [];
+        let data_13_futsal = [];
+
+        let markers = [];
+        let overlays = [];
+
+        let table_contents = [];
+
+        fetch('http://openAPI.seoul.go.kr:8088/634a4f64626b726137355752707257/json/ListPublicReservationSport/1/500/')
+            .then((response) => response.json())
+            .then((raw_data) => {
+                data = raw_data['ListPublicReservationSport']['row'];
+
+                for (let item of data){
+                    if (item.SVCSTATNM == '접수중') {
+                        table_contents.push(item)    
+                    };
+                    
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "골프장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "교육시설")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "농구장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "다목적경기장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "배구장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "배드민턴장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "야구장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "족구장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "체육관")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "축구장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "탁구장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "테니스장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+
+
+                    if ((item.SVCSTATNM == '접수중') && (item.MINCLASSNM == "풋살장")) {
+                        data_08_foot_volleyball.push(item);
+
+                        // 마커가 표시될 위치입니다 
+                        var markerPosition = new kakao.maps.LatLng(item.Y, item.X); 
+
+                        // 지도에 마커를 생성하고 표시한다
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition
+                        });
+
+                        markers.push(marker);
+
+                        // 마커가 지도 위에 표시되도록 설정합니다
+                        marker.setMap(map);
+                        
+                        // 마커가 드래그 가능하도록 설정합니다 
+                        marker.setDraggable(true); 
+
+                        // 커스텀 오버레이에 표시할 컨텐츠 입니다
+                        // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+                        // 별도의 이벤트 메소드를 제공하지 않습니다 
+                        var content = '<div class="wrap">' + 
+                                    '    <div class="info">' + 
+                                    '        <div class="title">' + item.MINCLASSNM + 
+                                            '</div>' + 
+                                    '        <div class="body">' + 
+                                                item.SVCNM + '<br>' + 
+                                    '           <a href="'+item.SVCURL+'" target="_blank" class="link">예약</a>' + 
+                                    '        </div>' + 
+                                    '    </div>' +    
+                                    '</div>';
+
+                        // 마커 위에 커스텀오버레이를 표시합니다
+                        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+                        var overlay = new kakao.maps.CustomOverlay({
+                            content: content,
+                            map: map,
+                            position: marker.getPosition()
+                                 
+                        });
+
+                        overlays.push(overlay);
+
+                        function markerDragged(marker) {
+                            for (var i = 0; i < markers.length; i++) {
+                                var marker = markers[i];
+                                var overlay = overlays[i];
+                                var position = marker.getPosition();
+                                overlay.setPosition(position);
+                            }
+                        };
+                        //마커가 드래그되었을 때 이벤트를 처리합니다.
+                        kakao.maps.event.addListener(marker, 'dragend', function () {
+                            markerDragged(marker);
+                        });   
+                    };
+                };
+                let cnt_00_seoul = table_contents.length;
+                let cnt00 = document.querySelector('#mt_00_seoul');
+                cnt00.innerText = cnt00.innerText.replace('n00',cnt_00_seoul);
+            });
+    </script>
+</body>
+</html>
